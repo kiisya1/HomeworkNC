@@ -43,6 +43,42 @@ input[type="radio"].visually-hidden {
   overflow: hidden;
 }
 
+.button {
+  position: relative;
+
+  display: block;
+  width: 280px;
+  padding: 15px 42px;
+
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 24px;
+  color: #ffffff;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+
+  border: 0;
+  border-radius: 6px;
+  background-color: #007a79;
+
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus,
+.button:active {
+  background-color: #004f4f;
+}
+
+.button:disabled {
+  color: #464646;
+
+  background-color: #efefef;
+
+  cursor: default;
+}
+
 .homework {
   max-width: 1160px;
   padding: 0 20px;
@@ -53,6 +89,14 @@ input[type="radio"].visually-hidden {
   padding: 0;
   margin: 0;
   margin-bottom: 30px;
+
+  font-weight: 600;
+}
+
+.homework__description {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 15px;
 
   font-weight: 600;
 }
@@ -71,5 +115,62 @@ input[type="radio"].visually-hidden {
 .homework__link:hover,
 .homework__link:focus,
 .homework__link:active {
-  color: #1fcecb;
+  color: #007a79;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack__output {
+  position: relative;
+
+  padding: 10px;
+  margin: 0;
+  margin-bottom: 15px;
+  margin-top: 20px;
+  width: 280px;
+  box-sizing: border-box;
+
+  text-align: center;
+
+  border: 1px solid #464646;
+  border-radius: 6px;
+}
+
+.stack__output::before {
+  position: absolute;
+  top: -20px;
+  left: 1px;
+  content: "Вывод значений";
+
+  font-size: 12px;
+  line-height: 14px;
+  color: #007a79;
+}
+
+.stack__input {
+  padding: 8px;
+  margin-bottom: 15px;
+  width: 280px;
+  height: 50px;
+
+  font: inherit;
+  letter-spacing: 0.15px;
+
+  background-color: transparent;
+  border: 1px solid #464646;
+  border-radius: 6px;
+
+  box-sizing: border-box;
+}
+
+.stack__input:focus {
+  border: 1px solid #007a79;
+  outline: none;
+}
+
+.stack__button {
+  margin-bottom: 15px;
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Homework № 2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="Description" content="Homework № 2">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href="../css/normalize.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <section class="homework">
+      <h1 class="homework__title">Домашняя работа № 2</h1>
+      <section class="homework__stack stack">
+        <h2 class="homework__description">Cтек</h2>
+        <p class="stack__output">Вывод</p>
+        <form class="stack__form action="#" method="post">
+          <input class="stack__input" type="text" name="value" id="value" placeholder="Введите текст" required>
+          <button class="stack__button button" type="submit" id="push">Добавить значение</button>
+        </form>
+        <button class="stack__button button" type="button" id="pop" disabled>Удалить значение</button>
+        <button class="stack__button button" type="button" id="peek" disabled>Показать значение</button>
+        <button class="stack__button button" type="button" id="getSize">Вывести длину</button>
+      </section>
+    </section>
+    <script src="js/script.js"></script>
+  </body>
+</html>
