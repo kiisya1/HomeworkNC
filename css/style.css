@@ -181,6 +181,7 @@ input[type="radio"].visually-hidden {
   font-size: 36px;
   line-height: 49px;
   color: #ffffff;
+  word-wrap: break-word;
 
   background-color: #16254d;
   border-top-left-radius: 4px;
@@ -259,6 +260,28 @@ input[type="radio"].visually-hidden {
   background-color: #1052f9;
 }
 
+.log {
+  width: 519px;
+  padding: 16px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+
+  border-top: 1px solid #16254c;
+
+  -webkit-box-sizing: border-box;
+
+          box-sizing: border-box;
+}
+
+.log__message {
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.log__message:last-of-type {
+  margin-bottom: 0;
+}
+
 @media (max-width: 560px) {
   body {
     background-color: #f6f6f6;
@@ -299,6 +322,7 @@ input[type="radio"].visually-hidden {
   }
 
   .stack__form {
+    width: 100%;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
   }
@@ -311,5 +335,10 @@ input[type="radio"].visually-hidden {
 
   .stack__submit {
     width: 100%;
+  }
+
+  .log {
+    width: calc(100% - 30px);
+    padding: 15px;
   }
 }
