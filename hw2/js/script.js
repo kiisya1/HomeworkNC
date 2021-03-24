@@ -11,8 +11,6 @@
   let peekButton = document.querySelector('#peek');
   let getSizeButton = document.querySelector('#getSize');
 
-  // Логирование
-
   let originalLog = console.log;
 
   function getTime () {
@@ -33,7 +31,7 @@
     logOutput.append(p);
   }
 
-  console.log = function (func, value) {
+  console.log = function (func, value = '') {
     let message = getTime();
     if (func === push) {
       message += ' Добавлено новое значение: ' + value;
@@ -43,12 +41,13 @@
       message += ' Показано значение: ' + value;
     } else if (func === getSize) {
       message += ' Показана длина стека: ' + value;
+    } else if (func === 'error') {
+      message += ' Возникла ошибка: ' + value;
     }
+
     originalLog.call(this, message);
     addLogElement(message);
   };
-
-  // Реализация стека
 
   class Stack {
     constructor() {
@@ -63,12 +62,23 @@
     }
 
     pop() {
-      if (this.length === 0) return undefined;
-      this.length--;
-      let value = this.list[this.length];
-      delete this.list[this.length];
-      console.log(pop, value);
-      return value;
+      try {
+        if (this.length === 0) {
+          throw new Error("Невозможно удалить значение. Значений нет, длина стека равна 0");
+        }
+
+        this.length--;
+        let value = this.list[this.length];
+        delete this.list[this.length];
+        console.log(pop, value);
+        return value;
+      } catch (err) {
+        if (this.length === 0) {
+          console.log('error', err.message);
+        } else {
+          console.log('error', err);
+        }
+      }
     }
 
     peek() {
@@ -82,11 +92,7 @@
     }
   }
 
-  // Создание стека
-
   let myStack = new Stack();
-
-  // Создание слушателей событий
 
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
