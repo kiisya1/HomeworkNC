@@ -31,19 +31,16 @@
     logOutput.append(p);
   }
 
+  let messageMap = {
+    'push': ' Добавлено новое значение: ',
+    'pop': ' Удалено значение: ',
+    'peek': ' Показано значение: ',
+    'getSize': ' Показана длина стека: ',
+    'error': ' Возникла ошибка: '
+  };
+
   console.log = function (func, value = '') {
-    let message = getTime();
-    if (func === push) {
-      message += ' Добавлено новое значение: ' + value;
-    } else if (func === pop) {
-      message += ' Удалено значение: ' + value;
-    } else if (func === peek) {
-      message += ' Показано значение: ' + value;
-    } else if (func === getSize) {
-      message += ' Показана длина стека: ' + value;
-    } else if (func === 'error') {
-      message += ' Возникла ошибка: ' + value;
-    }
+    let message = getTime() + messageMap[func] + value;
 
     originalLog.call(this, message);
     addLogElement(message);
@@ -58,7 +55,7 @@
     push(value) {
       this.list[this.length] = value;
       this.length++;
-      console.log(push, value);
+      console.log('push', value);
     }
 
     pop() {
@@ -70,7 +67,7 @@
         this.length--;
         let value = this.list[this.length];
         delete this.list[this.length];
-        console.log(pop, value);
+        console.log('pop', value);
         return value;
       } catch (err) {
         if (this.length === 0) {
@@ -82,12 +79,12 @@
     }
 
     peek() {
-      console.log(peek, this.list[this.length - 1]);
+      console.log('peek', this.list[this.length - 1]);
       return this.list[this.length - 1];
     }
 
     getSize () {
-      console.log(getSize, this.length);
+      console.log('getSize', this.length);
       return this.length;
     }
   }
