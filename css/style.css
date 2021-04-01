@@ -303,6 +303,7 @@ input[type="radio"].visually-hidden {
 
   display: flex;
   flex-wrap: wrap;
+  flex-grow: 1;
 
   margin: 10px;
   padding-top: 20px;
