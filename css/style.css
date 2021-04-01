@@ -282,6 +282,74 @@ input[type="radio"].visually-hidden {
   margin-bottom: 0;
 }
 
+.addition {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 522px;
+  box-sizing: border-box;
+
+  background-color: #f6f6f6;
+  border: 1px solid #16254c;
+}
+
+.addition__block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 10px;
+  width: 80px;
+  height: 80px;
+
+  background-color: #16254c;
+}
+
+.addition__delete {
+  position: relative;
+
+  padding: 0;
+  width: 40px;
+  height: 40px;
+
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+
+  cursor: pointer;
+}
+
+.addition__delete::before,
+.addition__delete::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16px;
+
+  width: 8px;
+  height: 40px;
+  background-color: #ffffff;
+}
+
+.addition__delete::before {
+  transform: rotate(45deg);
+}
+
+.addition__delete::after {
+  transform: rotate(-45deg);
+}
+
+.addition__delete:hover::before,
+.addition__delete:focus::before,
+.addition__delete:active::before,
+.addition__delete:hover::after,
+.addition__delete:focus::after,
+.addition__delete:active::after {
+  background-color: #e7ecf8;
+}
+
 @media (max-width: 560px) {
   body {
     background-color: #f6f6f6;
@@ -340,5 +408,9 @@ input[type="radio"].visually-hidden {
   .log {
     width: calc(100% - 30px);
     padding: 15px;
+  }
+
+  .addition {
+    width: calc(100% - 40px);
   }
 }
