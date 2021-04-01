@@ -283,9 +283,12 @@ input[type="radio"].visually-hidden {
 }
 
 .addition {
+  position: relative;
+
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
+  padding-top: 30px;
   margin: 0 auto;
   margin-bottom: 20px;
   width: 522px;
@@ -296,23 +299,28 @@ input[type="radio"].visually-hidden {
 }
 
 .addition__block {
+  position: relative;
+
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
 
   margin: 10px;
-  width: 80px;
-  height: 80px;
+  padding-top: 20px;
+  width: calc(50% - 20px);
+  min-height: 80px;
+  box-sizing: border-box;
 
-  background-color: #16254c;
+  border: 1px solid #16254c;
 }
 
 .addition__delete {
-  position: relative;
+  position: absolute;
+  top: 2px;
+  right: 2px;
 
   padding: 0;
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
 
   border: 0;
   border-radius: 0;
@@ -326,11 +334,11 @@ input[type="radio"].visually-hidden {
   content: "";
   position: absolute;
   top: 0;
-  left: 16px;
+  left: 8px;
 
-  width: 8px;
-  height: 40px;
-  background-color: #ffffff;
+  width: 4px;
+  height: 20px;
+  background-color: #16254c;
 }
 
 .addition__delete::before {
@@ -347,7 +355,7 @@ input[type="radio"].visually-hidden {
 .addition__delete:hover::after,
 .addition__delete:focus::after,
 .addition__delete:active::after {
-  background-color: #e7ecf8;
+  background-color: #213773;
 }
 
 @media (max-width: 560px) {

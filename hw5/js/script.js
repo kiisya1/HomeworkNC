@@ -5,33 +5,25 @@
   function getInnerElement (tag) {
     let innerElement = document.createElement(tag);
     innerElement.className = 'addition__block';
-
-    let buttonElement = getButtonElement();
-    addButtonClickHandler(buttonElement, innerElement);
-
-    innerElement.append(buttonElement);
+    addButtonElement(innerElement);
 
     return innerElement;
   }
 
-  function getButtonElement () {
+  function addButtonElement (element) {
     let buttonTemplate = document.querySelector('#button')
         .content
         .querySelector('.addition__delete');
     let buttonElement = buttonTemplate.cloneNode(true);
 
-    return buttonElement;
+    addButtonClickHandler(buttonElement, element);
+
+    element.append(buttonElement);
   }
 
   function addButtonClickHandler (buttonElement, parentElement) {
     buttonElement.addEventListener('click', function () {
-      let parentBlock = parentElement.parentElement;
-
-      if (parentBlock.children.length === 1) {
-        parentBlock.remove();
-      } else {
-        parentElement.remove();
-      }
+      parentElement.remove();
     });
   };
 
@@ -46,16 +38,35 @@
     return fragment;
   }
 
+  function addElements (parentElement, innerTag, number) {
+    let fragmentOfElements = addInnerElements(innerTag, number);
+    parentElement.append(fragmentOfElements);
+  }
+
   function makeBlock (parentTag) {
     let body = document.querySelector('body')
     let parentElement = document.createElement(parentTag);
     parentElement.className = 'addition';
+    addButtonElement(parentElement);
 
     return function (innerTag) {
-      return function (number) {
-        let fragmentOfElements = addInnerElements(innerTag, number);
-        parentElement.append(fragmentOfElements);
-        body.append(parentElement);
+      return function (arg) {
+        if (Number.isInteger(arg)) {
+          addElements(parentElement, innerTag, arg);
+          body.append(parentElement);
+        } else {
+          let middleElement = getInnerElement(arg);
+          parentElement.append(middleElement);
+          return function (arg) {
+            if (Number.isInteger(arg)) {
+              addElements(middleElement, innerTag, arg);
+              body.append(parentElement);
+            } else {
+              alert('Превышен допустимый уровень вложенности');
+              throw new Error('Превышен допустимый уровень вложенности');
+            }
+          }
+        }
       }
     }
   }
