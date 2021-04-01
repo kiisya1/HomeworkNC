@@ -50,16 +50,16 @@
     addButtonElement(parentElement);
 
     return function (innerTag) {
-      return function (arg) {
-        if (Number.isInteger(arg)) {
-          addElements(parentElement, innerTag, arg);
+      return function (arg1) {
+        if (Number.isInteger(arg1)) {
+          addElements(parentElement, innerTag, arg1);
           body.append(parentElement);
         } else {
-          let middleElement = getInnerElement(arg);
+          let middleElement = getInnerElement(innerTag);
           parentElement.append(middleElement);
-          return function (arg) {
-            if (Number.isInteger(arg)) {
-              addElements(middleElement, innerTag, arg);
+          return function (arg2) {
+            if (Number.isInteger(arg2)) {
+              addElements(middleElement, arg1, arg2);
               body.append(parentElement);
             } else {
               alert('Превышен допустимый уровень вложенности');
