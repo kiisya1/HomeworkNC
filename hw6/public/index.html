@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Homework № 6</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="Description" content="Homework № 2-3">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href="css/normalize.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__title">Cтек</h1>
+      <h2 class="header__description">Домашняя работа № 6</h2>
+    </header>
+    <section class="stack">
+      <p class="stack__output">- - - - -</p>
+      <button class="stack__button button" type="button" id="peek" disabled>Показать значение</button>
+      <button class="stack__button button" type="button" id="getSize">Показать длину</button>
+      <button class="stack__button button" type="button" id="pop" disabled>Удалить значение</button>
+
+      <form class="stack__form" action="#" method="post">
+        <input class="stack__input" type="text" name="value" id="value" placeholder="Введите текст" required>
+        <button class="stack__submit" type="submit" id="push">Добавить значение</button>
+      </form>
+    </section>
+    <section class="log">
+    </section>
+    <script src="bundle.js"></script>
+  </body>
+</html>

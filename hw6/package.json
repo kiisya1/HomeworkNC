@@ -1,0 +1,20 @@
+{
+  "name": "Homework6",
+  "version": "1.0.0",
+  "description": "Trying to use Webpack",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --open",
+    "eslint": "eslint src/**/*.js",
+    "test": "npm run eslint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
