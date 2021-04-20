@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Homework № 8</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="Description" content="Homework № 8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no">
+
+    <link href="../css/normalize.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__title">Двоичное дерево</h1>
+      <h2 class="header__description">Домашняя работа № 8</h2>
+    </header>
+    <main>
+      <section class="control">
+        <section class="control__block">
+          <form class="control__form" action="#" method="post" id="insert">
+            <h3 class="control__heading">Добавление узла</h3>
+            <input class="input control__input" type="number" name="value-insert" id="insert-input" placeholder="Введите число" min="0" max="999" required>
+            <button class="submit control__submit" type="submit">Добавить</button>
+          </form>
+        </section>
+        <section class="control__block">
+          <form class="control__form" action="#" method="post" id="remove">
+            <h3 class="control__heading">Удаление узла</h3>
+            <input class="input control__input" type="number" name="value-remove" id="remove-input" placeholder="Введите число" min="0" max="999" required>
+            <button class="submit control__submit" type="submit">Удалить</button>
+          </form>
+        </section>
+        <section class="control__block">
+          <form class="control__form" action="#" method="post" id="search">
+            <h3 class="control__heading">Поиск значения</h3>
+            <input class="input control__input" type="number" name="value-search" id="search-input" placeholder="Введите число" min="0" max="999" required>
+            <button class="submit control__submit" type="submit">Найти</button>
+          </form>
+          <p class="control__output" id="search-output">- - - - -</p>
+        </section>
+      </section>
+      <section class="tree">
+        <h3 class="tree__heading">Дерево</h3>
+        <div class="tree__diagramm">
+          <p class="tree__description">Введите число от 0 до 999 в форме "Добавление узла" и нажмите "Добавить" для построения дерева</p>
+        </div>
+      </section>
+    </main>
+    <script src="public/bundle.js"></script>
+  </body>
+</html>
