@@ -4,7 +4,7 @@ const binaryTree = new BinaryTree<number>(5);
 
 const htmlTree: HTMLElement | null = document.querySelector(".tree__diagramm");
 
-const searchOutput: HTMLElement | null = document.querySelector("#search-output");
+const output: HTMLElement | null = document.querySelector("#output");
 const searchForm: HTMLElement | null = document.querySelector("#search");
 const searchInput: HTMLInputElement | null = document.querySelector("#search-input");
 
@@ -60,9 +60,21 @@ if (insertForm !== null) {
   insertForm.addEventListener("submit", function(evt: Event): void {
     evt.preventDefault();
     if (insertInput) {
-      binaryTree.insert(Number(insertInput.value));
-      insertInput.value = "";
-      addTree();
+      try {
+        binaryTree.insert(Number(insertInput.value));
+        if (output) {
+          output.classList.remove("red");
+          output.textContent = `Узел ${insertInput.value} создан`;
+        }
+        addTree();
+        insertInput.value = "";
+      } catch (err) {
+        if (output) {
+          output.classList.add("red");
+          output.textContent = err.message;
+          insertInput.value = "";
+        }
+      }
     }
   });
 }
@@ -72,11 +84,19 @@ if (searchForm !== null) {
     evt.preventDefault();
 
     if (searchInput) {
-      const output: boolean = binaryTree.search(binaryTree.root, Number(searchInput.value));
-      searchInput.value = "";
-      if (searchOutput) {
-        searchOutput.textContent = String(output);
+      const result: boolean = binaryTree.search(binaryTree.root, Number(searchInput.value));
+      if (result === true) {
+        if (output) {
+          output.classList.remove("red");
+          output.textContent = `Узел ${searchInput.value} найден`;
+        }
+      } else {
+        if (output) {
+          output.classList.add("red");
+          output.textContent = `Узел ${searchInput.value} не найден`;
+        }
       }
+      searchInput.value = "";
     }
   });
 }
@@ -86,9 +106,21 @@ if (removeForm !== null) {
     evt.preventDefault();
 
     if (removeInput) {
-      binaryTree.remove(Number(removeInput.value));
-      removeInput.value = "";
-      addTree();
+      try {
+        binaryTree.remove(Number(removeInput.value));
+        if (output) {
+          output.classList.remove("red");
+          output.textContent = `Узел ${removeInput.value} успешно удален`;
+          addTree();
+          removeInput.value = "";
+        }
+      } catch (err) {
+        if (output) {
+          output.classList.add("red");
+          output.textContent = err.message;
+          removeInput.value = "";
+        }
+      }
     }
   });
 }

@@ -57,7 +57,6 @@ export class BinaryTree<T> {
   private checkAndAddDepth(value: number): void {
     this._depth++;
     if (this._depth >= value) {
-      alert("Превышено допустимое значение глубины дерева. Допустимая глубина " + value);
       throw new Error("Превышено допустимое значение глубины дерева. Допустимая глубина " + value);
     }
   }
@@ -82,7 +81,7 @@ export class BinaryTree<T> {
         this.insertNode(node.left, newNode);
       }
     } else if (newNode.data === node.data) {
-      node.data = newNode.data;
+      throw new Error(`Узел ${newNode.data} уже существует`);
     } else {
       if (node.right === null) {
         node.right = newNode;
@@ -142,8 +141,7 @@ export class BinaryTree<T> {
 
   private removeNode(node: TreeNode<T> | null, data: T): TreeNode<T> | null {
     if (node === null) {
-      alert("Узел не найден");
-      return null;
+      throw new Error(`Узел ${data} не найден`);
     }
 
     if (data < node.data) {
