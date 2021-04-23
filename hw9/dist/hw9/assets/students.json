@@ -1,0 +1,58 @@
+[
+  {
+    "surname": "Петров",
+    "name": "Василий",
+    "middleName": "Аркадьевич",
+    "dateOfBirth": "1980-02-17",
+    "score": 3
+  },
+  {
+    "surname": "Васина",
+    "name": "Марфа",
+    "middleName": "Юрьевна",
+    "dateOfBirth": "1995-11-30",
+    "score": 5
+  },
+  {
+    "surname": "Миловская",
+    "name": "Ольга",
+    "middleName": "Сергеевна",
+    "dateOfBirth": "1998-08-05",
+    "score": 4
+  },
+  {
+    "surname": "Чернышев",
+    "name": "Дмитрий",
+    "middleName": "Алексеевич",
+    "dateOfBirth": "1994-06-10",
+    "score": 5
+  },
+  {
+    "surname": "Крыгина",
+    "name": "Елена",
+    "middleName": "Александровна",
+    "dateOfBirth": "1987-09-01",
+    "score": 3
+  },
+  {
+    "surname": "Иванов",
+    "name": "Валерий",
+    "middleName": "Парфенович",
+    "dateOfBirth": "2000-07-25",
+    "score": 5
+  },
+  {
+    "surname": "Прокофьев",
+    "name": "Семен",
+    "middleName": "Евгеньевич",
+    "dateOfBirth": "1990-03-20",
+    "score": 5
+  },
+  {
+    "surname": "Зимин",
+    "name": "Николай",
+    "middleName": "Константинович",
+    "dateOfBirth": "1996-07-02",
+    "score": 4
+  }
+]
