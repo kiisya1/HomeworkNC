@@ -93,10 +93,11 @@ main {
 }
 
 .filter__input {
-  width: calc(100% - 90px);
-  padding-right: 25px;
+  width: calc(100%);
+  padding-right: 16px;
   margin: 0;
   margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
 .filter__input:hover,
@@ -128,12 +129,42 @@ main {
 }
 
 .filter__date {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
   width: 100%;
 
+}
+
+.filter__clear {
+  position: absolute;
+  top: 50%;
+  right: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padidng: 0;
+  width: 30px;
+  height: 30px;
+
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+
+  cursor: pointer;
+}
+
+.filter__clear:hover svg {
+  fill: #16254d;
+}
+
+.filter__clear:hover svg,
+.filter__clear:focus svg,
+.filter__clear:active svg {
+  fill: #1052f9;
 }
 
 .filter__input_date {
@@ -258,9 +289,9 @@ main {
   background-color: rgba(255, 0, 0, 0.2);
 }
 
-.table__yellow,
-.table__yellow_name {
-  background-color: rgba(255, 255, 0, 0.2);
+.table__green,
+.table__green_name {
+  background-color: rgba(0, 255, 0, 0.2);
 }
 
 .popup {

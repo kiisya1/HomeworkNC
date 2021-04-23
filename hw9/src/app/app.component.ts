@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import { StudentComponent } from "./student";
+import { Student } from "./student";
 
 @Component({
   selector: "app-root",
@@ -9,13 +9,13 @@ import { StudentComponent } from "./student";
 })
 
 export class AppComponent implements OnInit {
-  students: StudentComponent[];
-  loadedStudents: StudentComponent[] | null = null;
+  students: Student[];
+  loadedStudents: Student[] | null = null;
   isRedHighlighted: boolean = true;
   searchName: string = "";
   searchSurname: string = "";
   needYellow: boolean;
-  studentToDelete: StudentComponent | null = null;
+  studentToDelete: Student | null = null;
   isPopUpShown: boolean = false;
   selectedScore: "all" | number = "all";
   dateFrom: string = "";
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.http.get("assets/students.json", {responseType: "text"}).subscribe(data => this.students = JSON.parse(data, function (key: string, value: string): string | Date | number | StudentComponent {
+    this.http.get("assets/students.json", {responseType: "text"}).subscribe(data => this.students = JSON.parse(data, function (key: string, value: string): string | Date | number | Student {
       if (key === "dateOfBirth") {
         return new Date(value);
       }
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     }));
   }
 
-  getAllStudents(): StudentComponent[] {
+  getAllStudents(): Student[] {
     if (this.students) {
       if (this.loadedStudents === null) {
         this.loadedStudents = this.students.slice();
@@ -64,43 +64,43 @@ export class AppComponent implements OnInit {
     return -1;
   }
 
-  sortNameAsk(): StudentComponent[] {
+  sortNameAsk(): Student[] {
     return this.students.sort( (a, b) => this._sortAsk(a.name, b.name)) ;
   }
 
-  sortNameDesk(): StudentComponent[] {
+  sortNameDesk(): Student[] {
     return this.students.sort( (a, b) => this._sortDesk(a.name, b.name)) ;
   }
 
-  sortSurnameAsk(): StudentComponent[] {
+  sortSurnameAsk(): Student[] {
     return this.students.sort( (a, b) => this._sortAsk(a.surname, b.surname)) ;
   }
 
-  sortSurnameDesk(): StudentComponent[] {
+  sortSurnameDesk(): Student[] {
     return this.students.sort( (a, b) => this._sortDesk(a.surname, b.surname)) ;
   }
 
-  sortMiddleNameAsk(): StudentComponent[] {
+  sortMiddleNameAsk(): Student[] {
     return this.students.sort( (a, b) => this._sortAsk(a.middleName, b.middleName)) ;
   }
 
-  sortMiddleNameDesk(): StudentComponent[] {
+  sortMiddleNameDesk(): Student[] {
     return this.students.sort( (a, b) => this._sortDesk(a.middleName, b.middleName)) ;
   }
 
-  sortDateAsk(): StudentComponent[] {
+  sortDateAsk(): Student[] {
     return this.students.sort( (a, b) => this._sortAsk(a.dateOfBirth, b.dateOfBirth)) ;
   }
 
-  sortDateDesk(): StudentComponent[] {
+  sortDateDesk(): Student[] {
     return this.students.sort( (a, b) => this._sortDesk(a.dateOfBirth, b.dateOfBirth)) ;
   }
 
-  sortScoreAsk(): StudentComponent[] {
+  sortScoreAsk(): Student[] {
     return this.students.sort( (a, b) => this._sortAsk(a.score, b.score)) ;
   }
 
-  sortScoreDesk(): StudentComponent[] {
+  sortScoreDesk(): Student[] {
     return this.students.sort( (a, b) => this._sortDesk(a.score, b.score)) ;
   }
 
@@ -118,7 +118,7 @@ export class AppComponent implements OnInit {
     this.isRedHighlighted = !this.isRedHighlighted;
   }
 
-  confirmDelete(student: StudentComponent): void {
+  confirmDelete(student: Student): void {
     this.isPopUpShown = !this.isPopUpShown;
     this.studentToDelete = student;
   }
@@ -152,12 +152,23 @@ export class AppComponent implements OnInit {
   filterDate(dateOfBirth: Date): boolean {
     let startDate: Date;
     let endDate: Date;
-    if (this.dateFrom <= this.dateTo) {
-      startDate = (this.dateFrom !== "") ? new Date(this.dateFrom) : new Date(0);
-      endDate = (this.dateTo !== "") ? new Date(this.dateTo) : new Date();
-    } else {
-      endDate = (this.dateFrom !== "") ? new Date(this.dateFrom) : new Date(0);
-      startDate = (this.dateTo !== "") ? new Date(this.dateTo) : new Date();
+    if (this.dateFrom !== "" && this.dateTo !== "" ) {
+      if (this.dateFrom <= this.dateTo ) {
+        startDate = new Date(this.dateFrom);
+        endDate = new Date(this.dateTo);
+      } else {
+        endDate = new Date(this.dateFrom);
+        startDate = new Date(this.dateTo);
+      }
+    } else if (this.dateFrom === "" && this.dateTo === "") {
+      startDate = new Date(0);
+      endDate = new Date();
+    } else if (this.dateFrom === "" &&  this.dateTo !== "") {
+      startDate = new Date(0);
+      endDate = new Date(this.dateTo);
+    } else if (this.dateTo === "" && this.dateFrom !== "") {
+      endDate = new Date();
+      startDate = new Date(this.dateFrom);
     }
     return !(dateOfBirth >= startDate && dateOfBirth <= endDate);
   }

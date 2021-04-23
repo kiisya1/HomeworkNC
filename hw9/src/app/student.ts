@@ -1,4 +1,4 @@
-export class StudentComponent {
+export interface Student {
   surname: string;
   name: string;
   middleName: string;
