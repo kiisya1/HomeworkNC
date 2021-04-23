@@ -1,0 +1,150 @@
+<header class="header">
+  <h1 class="header__title">Таблица студентов</h1>
+  <h2 class="header__description">Домашняя работа № 9</h2>
+</header>
+<main>
+  <section class="filter">
+    <h3 class="filter__heading">Фильтр</h3>
+    <form class="filter__form" action="#" method="post">
+      <fieldset class="filter__field">
+        <input class="checkbox filter__checkbox visually-hidden" type="checkbox" name="value-lose" id="input-lose" checked (change)="changeHighlight()" (input)="false">
+        <label class="filter__label filter__label_checkbox" for="input-lose">Выделить отстающих</label>
+      </fieldset>
+      <fieldset class="filter__field">
+        <h4 class="filter__subheading">Поиск по имени или фамилии</h4>
+        <input class="input filter__input" #inputName type="search" name="value-name" placeholder="Имя" [(ngModel)]="searchName">
+        <button class="button filter__button" type="button" (click)="searchName = inputName.value">Найти</button>
+        <input class="input filter__input" #inputSurname type="search" name="value-surname" placeholder="Фамилия" [(ngModel)]="searchSurname">
+        <button class="button filter__button" type="button" (click)="searchSurname = inputSurname.value">Найти</button>
+      </fieldset>
+
+      <fieldset class="filter__field">
+        <h4 class="filter__subheading">Поиск по дате рождения</h4>
+        <div class="filter__date">
+          <label class="filter__label" for="input-start-date">С</label>
+          <input #dateFromInput class="input filter__input filter__input_date" type="date" name="value-start-date" id="input-start-date" placeholder="Дата" (input)="false">
+        </div>
+        <div class="filter__date">
+          <label class="filter__label" for="input-end-date">По</label>
+          <input #dateToInput class="input filter__input filter__input_date" type="date" name="value-end-date" id="input-end-date" placeholder="Дата" (input)="false">
+        </div>
+        <button class="button filter__button filter__button_date" type="button" (click)="dateFrom = dateFromInput.value; dateTo = dateToInput.value;">Найти</button>
+      </fieldset>
+
+      <fieldset class="filter__field">
+        <h4 class="filter__subheading">Поиск по среднему баллу</h4>
+        <input class="filter__radio visually-hidden" type="radio" name="score" id="score-all" value="0" checked>
+        <label class="filter__radio-label" for="score-all" (click)="selectedScore = 'all'">Все</label>
+        <input class="filter__radio visually-hidden" type="radio" name="score" id="score-3" value="3">
+        <label class="filter__radio-label" for="score-3" (click)="selectedScore = 3">3</label>
+        <input class="filter__radio visually-hidden" type="radio" name="score" id="score-4" value="4">
+        <label class="filter__radio-label" for="score-4" (click)="selectedScore = 4">4</label>
+        <input class="filter__radio visually-hidden" type="radio" name="score" id="score-5" value="5">
+        <label class="filter__radio-label" for="score-5" (click)="selectedScore = 5">5</label>
+      </fieldset>
+
+    </form>
+  </section>
+  <section class="output">
+    <div class="output__head">
+      <h3 class="output__heading">Таблица</h3>
+      <button class="button output__button" (click)="sortAsIs()">Сортировка по умолчанию</button>
+    </div>
+    <table class="output__table table">
+      <tr class="table__head" >
+        <th class="table__head-block">
+          Фамилия
+          <div class="table__sort-block">
+            <button class="table__sort table__sort_asc" type="button" (click)="sortSurnameAsk()">
+              <span class="visually-hidden">По возрастанию</span>
+              <svg width="17" height="9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 9" fill="#16254d"><path d="M8.5 7.2L1.3.2C1-.1.5-.1.2.2c-.3.3-.3.8 0 1L8 8.8c.3.3.8.3 1.1 0l7.7-7.5c.1-.2.2-.4.2-.6s-.1-.4-.2-.5c-.3-.3-.8-.3-1.1 0l-7.2 7z"/></svg>
+            </button>
+            <button class="table__sort table__sort_desk" type="button" (click)="sortSurnameDesk()">
+              <span class="visually-hidden">По убыванию</span>
+              <svg width="17" height="9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 9" fill="#16254d"><path d="M8.5 7.2L1.3.2C1-.1.5-.1.2.2c-.3.3-.3.8 0 1L8 8.8c.3.3.8.3 1.1 0l7.7-7.5c.1-.2.2-.4.2-.6s-.1-.4-.2-.5c-.3-.3-.8-.3-1.1 0l-7.2 7z"/></svg>
+            </button>
+          </div>
+        </th>
+        <th class="table__head-block">
+          Имя
+          <div class="table__sort-block">
+            <button class="table__sort table__sort_asc" type="button" (click)="sortNameAsk()">
+              <span class="visually-hidden">По возрастанию</span>
+              <svg width="17" height="9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 9" fill="#16254d"><path d="M8.5 7.2L1.3.2C1-.1.5-.1.2.2c-.3.3-.3.8 0 1L8 8.8c.3.3.8.3 1.1 0l7.7-7.5c.1-.2.2-.4.2-.6s-.1-.4-.2-.5c-.3-.3-.8-.3-1.1 0l-7.2 7z"/></svg>
+            </button>
+            <button class="table__sort table__sort_desk" type="button" (click)="sortNameDesk()">
+              <span class="visually-hidden">По убыванию</span>
+              <svg width="17" height="9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 9" fill="#16254d"><path d="M8.5 7.2L1.3.2C1-.1.5-.1.2.2c-.3.3-.3.8 0 1L8 8.8c.3.3.8.3 1.1 0l7.7-7.5c.1-.2.2-.4.2-.6s-.1-.4-.2-.5c-.3-.3-.8-.3-1.1 0l-7.2 7z"/></svg>
+            </button>
+          </div>
+        </th>
+        <th class="table__head-block">
+          Отчество
+          <div class="table__sort-block">
+            <button class="table__sort table__sort_asc" type="button" (click)="sortMiddleNameAsk()">
+              <span class="visually-hidden">По возрастанию</span>
+              <svg width="17" height="9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 9" fill="#16254d"><path d="M8.5 7.2L1.3.2C1-.1.5-.1.2.2c-.3.3-.3.8 0 1L8 8.8c.3.3.8.3 1.1 0l7.7-7.5c.1-.2.2-.4.2-.6s-.1-.4-.2-.5c-.3-.3-.8-.3-1.1 0l-7.2 7z"/></svg>
+            </button>
+            <button class="table__sort table__sort_desk" type="button" (click)="sortMiddleNameDesk()">
+              <span class="visually-hidden">По убыванию</span>
+              <svg width="17" height="9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 9" fill="#16254d"><path d="M8.5 7.2L1.3.2C1-.1.5-.1.2.2c-.3.3-.3.8 0 1L8 8.8c.3.3.8.3 1.1 0l7.7-7.5c.1-.2.2-.4.2-.6s-.1-.4-.2-.5c-.3-.3-.8-.3-1.1 0l-7.2 7z"/></svg>
+            </button>
+          </div>
+        </th>
+        <th class="table__head-block">
+          Дата рождения
+          <div class="table__sort-block">
+            <button class="table__sort table__sort_asc" type="button" (click)="sortDateAsk()">
+              <span class="visually-hidden">По возрастанию</span>
+              <svg width="17" height="9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 9" fill="#16254d"><path d="M8.5 7.2L1.3.2C1-.1.5-.1.2.2c-.3.3-.3.8 0 1L8 8.8c.3.3.8.3 1.1 0l7.7-7.5c.1-.2.2-.4.2-.6s-.1-.4-.2-.5c-.3-.3-.8-.3-1.1 0l-7.2 7z"/></svg>
+            </button>
+            <button class="table__sort table__sort_desk" type="button" (click)="sortDateDesk()">
+              <span class="visually-hidden">По убыванию</span>
+              <svg width="17" height="9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 9" fill="#16254d"><path d="M8.5 7.2L1.3.2C1-.1.5-.1.2.2c-.3.3-.3.8 0 1L8 8.8c.3.3.8.3 1.1 0l7.7-7.5c.1-.2.2-.4.2-.6s-.1-.4-.2-.5c-.3-.3-.8-.3-1.1 0l-7.2 7z"/></svg>
+            </button>
+          </div>
+        </th>
+        <th class="table__head-block">
+          Средний балл
+          <div class="table__sort-block">
+            <button class="table__sort table__sort_asc" type="button" (click)="sortScoreAsk()">
+              <span class="visually-hidden">По возрастанию</span>
+              <svg width="17" height="9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 9" fill="#16254d"><path d="M8.5 7.2L1.3.2C1-.1.5-.1.2.2c-.3.3-.3.8 0 1L8 8.8c.3.3.8.3 1.1 0l7.7-7.5c.1-.2.2-.4.2-.6s-.1-.4-.2-.5c-.3-.3-.8-.3-1.1 0l-7.2 7z"/></svg>
+            </button>
+            <button class="table__sort table__sort_desk" type="button" (click)="sortScoreDesk()">
+              <span class="visually-hidden">По убыванию</span>
+              <svg width="17" height="9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 9" fill="#16254d"><path d="M8.5 7.2L1.3.2C1-.1.5-.1.2.2c-.3.3-.3.8 0 1L8 8.8c.3.3.8.3 1.1 0l7.7-7.5c.1-.2.2-.4.2-.6s-.1-.4-.2-.5c-.3-.3-.8-.3-1.1 0l-7.2 7z"/></svg>
+            </button>
+          </div>
+        </th>
+        <th class="table__head-block">
+          Удалить
+        </th>
+      </tr>
+      <tr *ngFor="let student of getAllStudents()" [class.table__red]="student.score < 4 && isRedHighlighted" [class.table__yellow_name] = "findStudentByName(student.name)" [class.table__yellow] = "findStudentBySurname(student.surname)" [class.table__isHidden] = "filterScore(student.score)" [class.table__hide] = "filterDate(student.dateOfBirth)">
+        <td>{{student.surname}}</td>
+        <td>{{student.name}}</td>
+        <td>{{student.middleName}}</td>
+        <td>{{this.getDate(student.dateOfBirth)}}</td>
+        <td>{{student.score}}</td>
+        <td>
+          <button class="table__delete" type="button" (click)="confirmDelete(student)">
+            <span class="visually-hidden">Удалить</span>
+            <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="#16254d"><path d="M6.9 6l4.9-4.9c.2-.2.2-.6 0-.9s-.6-.2-.9 0L6 5.1 1.1.2C.9 0 .5 0 .2.2s-.2.6 0 .9L5.1 6 .2 10.9c-.2.2-.2.6 0 .9.2.2.6.2.9 0L6 6.9l4.9 4.9c.2.2.6.2.9 0 .2-.2.2-.6 0-.9L6.9 6z"/></svg>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </section>
+  <section class="popup" *ngIf="isPopUpShown">
+    <div class="popup__container">
+      <button class="popup__close" type="button" (click)="cancelDelete()">
+        <span class="visually-hidden">Закрыть</span>
+        <svg width="12" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="#ffffff"><path d="M6.9 6l4.9-4.9c.2-.2.2-.6 0-.9s-.6-.2-.9 0L6 5.1 1.1.2C.9 0 .5 0 .2.2s-.2.6 0 .9L5.1 6 .2 10.9c-.2.2-.2.6 0 .9.2.2.6.2.9 0L6 6.9l4.9 4.9c.2.2.6.2.9 0 .2-.2.2-.6 0-.9L6.9 6z"/></svg>
+      </button>
+      <p class="popup__message">Вы уверены,что хотите удалить запись студента: <span class="popup__stress">{{studentToDelete.surname}} {{studentToDelete.name}}</span>?</p>
+      <button class="button popup__button" type="button" (click)="delete()">Удалить</button>
+      <button class="button popup__button_grey" type="button" (click)="cancelDelete()">Отменить</button>
+    </div>
+  </section>
+</main>
