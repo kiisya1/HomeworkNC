@@ -1,0 +1,174 @@
+.add-form {
+  position: fixed;
+  left: 0; right: 0;
+  top: 0; bottom: 0;
+
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.add-form__container {
+  position: absolute;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+
+  width: 900px;
+  padding: 30px 20px;
+  box-sizing: border-box;
+
+  background-color: #e5e5e5;
+  border-radius: 4px;
+
+  transform: translate(-50%, -50%);
+}
+
+.add-form__close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5px;
+  width: 26px;
+  height: 26px;
+
+  border-radius: 50%;
+  border: 3px solid #053fd2;
+  background-color: #053fd2;
+
+  cursor: pointer;
+}
+
+.add-form__close:hover,
+.add-form__close:focus,
+.add-form__close:active {
+  background-color: #1052f9;
+  border: 3px solid #1052f9;
+}
+
+.add-form__close svg {
+  flex-shrink: 0;
+}
+
+.add-form__heading {
+  margin: 0;
+  margin-bottom: 20px;
+
+  font-size: 24px;
+  line-height: 48px;
+}
+
+.add-form__form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.add-form__fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  margin-bottom: 20px;
+  padding: 0;
+  width: 100%;
+
+  border: none;
+}
+
+.add-form__subheading {
+  margin: 0;
+  margin-bottom: 10px;
+  width: 100%;
+
+  font-size: 16px;
+  line-height: 32px;
+}
+
+.add-form__label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.add-form__label-text {
+  margin-bottom: 5px;
+}
+
+.add-form__input:hover,
+.add-form__input:focus {
+  outline: none;
+  border: 1px solid #16254d;
+}
+
+
+.add-form__clear {
+  position: absolute;
+  top: 33px;
+  right: 70px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+
+  background-color: transparent;
+  border: none;
+
+  cursor: pointer;
+}
+
+.add-form__clear svg {
+  fill: #16254d;
+}
+
+.add-form__clear:hover svg,
+.add-form__clear:focus svg,
+.add-form__clear:active svg {
+  fill: #1052f9;
+}
+
+.add-form__submit {
+  width: 150px;
+}
+
+.add-form__errors {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  color: red;
+  font-size: 10px;
+  line-height: 15px;
+}
+
+input.ng-invalid.ng-touched,
+input.ng-invalid.ng-touched:hover,
+input.ng-invalid.ng-touched:focus,
+.add-form__input_red,
+.add-form__input_red:hover,
+.add-form__input_red:focus {
+  border-color: red;
+}
+
+.add-form__errors_group {
+  width: 100%;
+}
+
+.add-form__button_grey {
+  width: 150px;
+  margin-left: 20px;
+  background-color: darkgrey;
+}
+
+.add-form__button_grey:hover,
+.add-form__button_grey:focus,
+.add-form__button_grey:active {
+  background-color: #909090;
+}

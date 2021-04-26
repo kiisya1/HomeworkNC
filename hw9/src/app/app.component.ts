@@ -20,6 +20,8 @@ export class AppComponent implements OnInit {
   selectedScore: "all" | number = "all";
   dateFrom: string = "";
   dateTo: string = "";
+  editableStudent: Student | null = null;
+  isEditWindowShown: boolean = false;
 
 
   constructor(private http: HttpClient) {
@@ -108,9 +110,8 @@ export class AppComponent implements OnInit {
     const time: string[] = [
       "0" + date.getDate(),
       "0" + (date.getMonth() + 1),
-      "" + date.getFullYear(),
+      "0" + date.getFullYear(),
     ].map(component => component.slice(-2));
-
     return time.join(".");
   }
 
@@ -140,13 +141,7 @@ export class AppComponent implements OnInit {
   }
 
   filterScore(score: number): boolean {
-    if (this.selectedScore === "all") {
-      return false;
-    }
-    if (this.selectedScore === score) {
-      return false;
-    }
-    return true;
+    return !(this.selectedScore === "all" || this.selectedScore === score);
   }
 
   filterDate(dateOfBirth: Date): boolean {
@@ -161,10 +156,10 @@ export class AppComponent implements OnInit {
         startDate = new Date(this.dateTo);
       }
     } else if (this.dateFrom === "" && this.dateTo === "") {
-      startDate = new Date(0);
+      startDate = new Date(1900, 0);
       endDate = new Date();
     } else if (this.dateFrom === "" &&  this.dateTo !== "") {
-      startDate = new Date(0);
+      startDate = new Date(1900, 0);
       endDate = new Date(this.dateTo);
     } else if (this.dateTo === "" && this.dateFrom !== "") {
       endDate = new Date();
@@ -177,10 +172,7 @@ export class AppComponent implements OnInit {
     if (this.searchName !== "") {
       const lowerName: string = name.toLowerCase();
       const findingName: string = this.searchName.toLowerCase();
-      if (lowerName.indexOf(findingName) === 0) {
-        return true;
-      }
-      return false;
+      return lowerName.indexOf(findingName) === 0;
     }
     return false;
   }
@@ -189,11 +181,33 @@ export class AppComponent implements OnInit {
     if (this.searchSurname !== "") {
       const name: string = surname.toLowerCase();
       const findingName: string = this.searchSurname.toLowerCase();
-      if (name.indexOf(findingName) === 0) {
-        return true;
-      }
-      return false;
+      return name.indexOf(findingName) === 0;
     }
     return false;
+  }
+
+  saveStudent(value: Student): void {
+    if (this.editableStudent === null) {
+      this.students.splice(this.students.length, 0, value);
+      this.loadedStudents.splice(this.loadedStudents.length, 0, value);
+    } else {
+      const index = this.students.indexOf(this.editableStudent);
+      this.students.splice(index, 1, value);
+      const indexLoaded = this.loadedStudents.indexOf(this.editableStudent);
+      this.loadedStudents.splice(indexLoaded, 1, value);
+      this.editableStudent = null;
+    }
+    this.isEditWindowShown = false;
+
+  }
+
+  editStudent(student: Student | null): void {
+    this.editableStudent = student;
+    this.isEditWindowShown = true;
+  }
+
+  cancelEditStudent(): void {
+    this.editableStudent = null;
+    this.isEditWindowShown = false;
   }
 }

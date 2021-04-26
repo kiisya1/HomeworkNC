@@ -1,0 +1,47 @@
+<section class="add-form">
+  <div class="add-form__container">
+    <button class="add-form__close" type="button" (click)="cancelEdit()">
+      <span class="visually-hidden">Закрыть</span>
+      <svg width="12" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="#ffffff"><path d="M6.9 6l4.9-4.9c.2-.2.2-.6 0-.9s-.6-.2-.9 0L6 5.1 1.1.2C.9 0 .5 0 .2.2s-.2.6 0 .9L5.1 6 .2 10.9c-.2.2-.2.6 0 .9.2.2.6.2.9 0L6 6.9l4.9 4.9c.2.2.6.2.9 0 .2-.2.2-.6 0-.9L6.9 6z"/></svg>
+    </button>
+    <h3 class="add-form__heading">Форма добавления/редактирования студентов</h3>
+    <form novalidate [formGroup]="form" action="#" method="post" class="add-form__form" (ngSubmit)="onSubmit()">
+      <fieldset formGroupName="fullName" class="add-form__fieldset">
+        <label class="add-form__label">
+          <span class="add-form__label-text">Фамилия</span>
+          <input formControlName="surname" class="input add-form__input" [class.add-form__input_red]="checkSurnameInput()" type="text" name="surname" placeholder="Введите фамилию" minlength="2" pattern="^[A-Za-zА-Яа-яЁё]+$" required>
+          <span *ngIf="checkValidity(surname)" class="add-form__errors">{{getErrorText("fullName.surname")}}</span>
+        </label>
+        <label class="add-form__label">
+          <span class="add-form__label-text">Имя</span>
+          <input formControlName="name" id="name" class="input add-form__input" [class.add-form__input_red]="checkSurnameInput() || checkMiddleNameInput()" type="text" name="name" placeholder="Введите имя" minlength="2" pattern="^[A-Za-zА-Яа-яЁё]+$" required>
+          <span *ngIf="checkValidity(name)" class="add-form__errors">{{getErrorText("fullName.name")}}</span>
+        </label>
+        <label class="add-form__label">
+          <span class="add-form__label-text">Отчество</span>
+          <input formControlName="middleName" class="input add-form__input" [class.add-form__input_red]="checkMiddleNameInput()" type="text" name="middle-name" placeholder="Введите отчество" minlength="2" pattern="^[A-Za-zА-Яа-яЁё]+$" required>
+          <span *ngIf="checkValidity(middleName)" class="add-form__errors">{{getErrorText("fullName.middleName")}}</span>
+        </label>
+        <span *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="add-form__errors add-form__errors_group">{{getErrorText("fullName")}}</span>
+      </fieldset>
+      <fieldset class="add-form__fieldset">
+        <label class="add-form__label">
+          <span class="add-form__label-text">Дата рождения</span>
+          <input formControlName="date" #dateInput class="input add-form__input add-form__input_date" type="date" name="date" placeholder="Введите дату" required (input)="false">
+          <span *ngIf="checkValidity(date)" class="add-form__errors">{{getErrorText("date")}}</span>
+          <button class="add-form__clear" type="button" *ngIf="dateInput.value !== ''" (click)="date.patchValue(null)">
+            <span class="visually-hidden">Очистить</span>
+            <svg width="12" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"><path d="M6.9 6l4.9-4.9c.2-.2.2-.6 0-.9s-.6-.2-.9 0L6 5.1 1.1.2C.9 0 .5 0 .2.2s-.2.6 0 .9L5.1 6 .2 10.9c-.2.2-.2.6 0 .9.2.2.6.2.9 0L6 6.9l4.9 4.9c.2.2.6.2.9 0 .2-.2.2-.6 0-.9L6.9 6z"/></svg>
+          </button>
+        </label>
+        <label class="add-form__label">
+          <span class="add-form__label-text">Средний балл</span>
+          <input formControlName="score" class="input add-form__input add-form__input_score" type="number" name="score" placeholder="Введите средний балл" min="0" max="5" required>
+          <span *ngIf="checkValidity(score)" class="add-form__errors">{{getErrorText("score")}}</span>
+        </label>
+      </fieldset>
+      <button class="submit add-form__submit">Сохранить</button>
+      <button class="submit add-form__button_grey" type="button" (click)="cancelEdit()">Отменить</button>
+    </form>
+  </div>
+</section>

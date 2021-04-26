@@ -146,7 +146,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  padidng: 0;
+  padding: 0;
   width: 30px;
   height: 30px;
 
@@ -157,7 +157,7 @@ main {
   cursor: pointer;
 }
 
-.filter__clear:hover svg {
+.filter__clear svg {
   fill: #16254d;
 }
 
@@ -218,13 +218,26 @@ main {
 }
 
 .output__button {
+  margin-left: auto;
+  margin-right: 20px;
+  border-radius: 4px;
+}
+
+.output__button_gray {
   margin-bottom: 20px;
   background-color: darkgrey;
   border-radius: 4px;
 }
 
+.output__button_gray:hover,
+.output__button_gray:focus,
+.output__button_gray:active {
+  background-color: #909090;
+}
+
 .output__table {
   width: 100%;
+  margin-bottom: 40px;
 }
 .table {
   border-collapse: collapse;
@@ -271,7 +284,12 @@ main {
   transform: rotate(180deg);
 }
 
-.table__delete {
+.table__controls {
+  display: flex;
+}
+
+.table__delete,
+.table__edit {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -283,6 +301,10 @@ main {
   border-radius: 4px;
 
   cursor: pointer;
+}
+
+.table__edit {
+  margin-left: 10px;
 }
 
 .table__red {
