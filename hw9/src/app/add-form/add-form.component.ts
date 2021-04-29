@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { Student } from "../student";
@@ -8,7 +8,8 @@ import { nameValidator } from "./fullname-validator";
 @Component({
   selector: "add-form",
   templateUrl: "./add-form.component.html",
-  styleUrls: ["./add-form.component.css"]
+  styleUrls: ["./add-form.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddFormComponent implements OnChanges, OnInit {
   _student: Student | null = null;
@@ -16,6 +17,7 @@ export class AddFormComponent implements OnChanges, OnInit {
   @Input() set student(value: Student) {
     this._student = value;
   }
+  @Input() isPoorVision: boolean;
 
   @Output() saveStudent = new EventEmitter<Student>();
   @Output() cancelEditStudent = new EventEmitter();

@@ -1,6 +1,68 @@
+.header {
+  position: relative;
+
+  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+
+  width: calc(100% - 40px);
+  height: 1px;
+  background-color: #16254c;
+}
+
+.header__title {
+  padding: 0;
+  margin: 0;
+  margin-right: 40px;
+
+  font-size: 36px;
+  line-height: 49px;
+  font-weight: 700;
+}
+
+.header__description {
+  padding: 0;
+  margin: 0;
+
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+
 main {
   display: flex;
+  flex-wrap: wrap;
   padding: 20px;
+}
+
+.vision {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 16px;
+  line-height: 32px;
 }
 
 .filter {
@@ -31,7 +93,8 @@ main {
   margin: 0;
 }
 
-.filter__field {
+.filter__field,
+.vision__field {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -43,7 +106,12 @@ main {
   border: none;
 }
 
-.filter__label_checkbox {
+.vision__field {
+  margin-left: auto;
+}
+
+.filter__label_checkbox,
+.vision__label_checkbox {
   position: relative;
   padding: 5px 0;
   padding-right: 5px;
@@ -52,11 +120,13 @@ main {
   cursor: pointer;
 }
 
-.filter__label_checkbox:hover {
+.filter__label_checkbox:hover,
+.vision__label_checkbox:hover {
   color: #213773;
 }
 
-.filter__label_checkbox::before {
+.filter__label_checkbox::before,
+.vision__label_checkbox::before {
   content: "";
   position: absolute;
   top: 5px;
@@ -68,7 +138,8 @@ main {
   background-color: white;
 }
 
-.filter__label_checkbox::after{
+.filter__label_checkbox::after,
+.vision__label_checkbox::after {
   content: "";
   position: absolute;
   top: 6px;
@@ -82,12 +153,20 @@ main {
   transition: 300ms ease-in-out all;
 }
 
-.filter__checkbox:checked ~ .filter__label_checkbox::after {
+.vision__label_checkbox::before,
+.vision__label_checkbox::after {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.filter__checkbox:checked ~ .filter__label_checkbox::after,
+.vision__checkbox:checked ~ .vision__label_checkbox::after{
   left: 28px;
   background-color: #053fd2;
 }
 
-.filter__checkbox:focus ~ .filter__label_checkbox {
+.filter__checkbox:focus ~ .filter__label_checkbox,
+.vision__checkbox:focus ~ .vision__label_checkbox{
   color: #213773;
   outline: 5px auto -webkit-focus-ring-color;
 }
@@ -311,8 +390,7 @@ main {
   background-color: rgba(255, 0, 0, 0.2);
 }
 
-.table__green,
-.table__green_name {
+.table__green {
   background-color: rgba(0, 255, 0, 0.2);
 }
 
@@ -404,4 +482,118 @@ main {
 .table__hide {
   display: none;
 }
+
+.table__blue {
+  background-color: rgba(5, 63, 210, 0.3);
+}
+
+.poor-vision {
+  color: white;
+  background-color: black;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.poor-vision .header::after {
+  background-color: white;
+}
+
+.poor-vision .filter__label_checkbox:hover,
+.poor-vision .vision__label_checkbox:hover {
+  color: white;
+}
+
+.poor-vision .filter__label_checkbox::after,
+.poor-vision .vision__label_checkbox::after {
+  background-color: black;
+}
+
+.poor-vision .filter__checkbox:focus ~ .filter__label_checkbox,
+.poor-vision .vision__checkbox:focus ~ .vision__label_checkbox{
+  color: white;
+}
+
+.poor-vision .filter__input {
+  color: white;
+  background-color: black;
+  border-color: white;
+}
+.poor-vision .filter__input::placeholder {
+  color: white;
+}
+
+.poor-vision .filter__input:hover,
+.poor-vision .filter__input:focus {
+  border: 1px solid dodgerblue;
+}
+
+.poor-vision .filter__clear {
+  background-color: white;
+  border-radius: 4px;
+}
+
+.poor-vision .filter__clear svg {
+  fill: black;
+}
+
+.poor-vision .filter__clear:hover svg,
+.poor-vision .filter__clear:focus svg,
+.poor-vision .filter__clear:active svg {
+  fill: #1052f9;
+}
+
+.poor-vision .table {
+  background-color: black;
+}
+
+.poor-vision .table tr {
+  border-bottom: 1px solid white;
+}
+
+.poor-vision .table__head {
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.poor-vision .table__sort {
+  background-color: white;
+}
+
+.poor-vision .table__delete,
+.poor-vision .table__edit {
+  width: 40px;
+  height:40px;
+  background-color: white;
+}
+
+.poor-vision .table__delete:hover,
+.poor-vision .table__delete:focus,
+.poor-vision .table__delete:active,
+.poor-vision .table__edit:hover,
+.poor-vision .table__edit:focus,
+.poor-vision .table__edit:active,
+.poor-vision .table__sort:hover,
+.poor-vision .table__sort:focus,
+.poor-vision .table__sort:active {
+  background-color: yellow;
+}
+
+.poor-vision .submit,
+.poor-vision .button {
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.poor-vision .table__red {
+  background-color: rgba(255, 0, 0, 1);
+}
+
+.poor-vision .table__green {
+  background-color: rgba(0, 255, 0, 1);
+}
+
+.poor-vision .table__blue {
+  background-color: rgba(5, 63, 210, 1);
+}
+
 

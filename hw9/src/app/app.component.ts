@@ -1,15 +1,17 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnInit } from "@angular/core";
 import { Student } from "./student";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"]
+  styleUrls: ["./app.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, DoCheck {
   students: Student[];
+  oldStudents: Student[] | null = null;
   loadedStudents: Student[] | null = null;
   isRedHighlighted: boolean = true;
   searchName: string = "";
@@ -22,9 +24,10 @@ export class AppComponent implements OnInit {
   dateTo: string = "";
   editableStudent: Student | null = null;
   isEditWindowShown: boolean = false;
+  isPoorVision: boolean = false;
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -37,6 +40,15 @@ export class AppComponent implements OnInit {
     }));
   }
 
+  ngDoCheck(): void {
+    if (this.oldStudents === null && this.students?.length !== 0) {
+      this.cdr.detectChanges();
+      if (Array.isArray(this.students)) {
+        this.oldStudents = [...this.students];
+      }
+    }
+  }
+
   getAllStudents(): Student[] {
     if (this.students) {
       if (this.loadedStudents === null) {
@@ -44,75 +56,6 @@ export class AppComponent implements OnInit {
       }
       return this.students;
     }
-  }
-
-  private _sortAsk(a: string | number | Date, b: string | number | Date): number {
-    if (a > b) {
-      return 1;
-    }
-    if (a === b) {
-      return 0;
-    }
-    return -1;
-  }
-
-  private _sortDesk(a: string | number | Date, b: string | number | Date): number {
-    if (a < b) {
-      return 1;
-    }
-    if (a === b) {
-      return 0;
-    }
-    return -1;
-  }
-
-  sortNameAsk(): Student[] {
-    return this.students.sort( (a, b) => this._sortAsk(a.name, b.name)) ;
-  }
-
-  sortNameDesk(): Student[] {
-    return this.students.sort( (a, b) => this._sortDesk(a.name, b.name)) ;
-  }
-
-  sortSurnameAsk(): Student[] {
-    return this.students.sort( (a, b) => this._sortAsk(a.surname, b.surname)) ;
-  }
-
-  sortSurnameDesk(): Student[] {
-    return this.students.sort( (a, b) => this._sortDesk(a.surname, b.surname)) ;
-  }
-
-  sortMiddleNameAsk(): Student[] {
-    return this.students.sort( (a, b) => this._sortAsk(a.middleName, b.middleName)) ;
-  }
-
-  sortMiddleNameDesk(): Student[] {
-    return this.students.sort( (a, b) => this._sortDesk(a.middleName, b.middleName)) ;
-  }
-
-  sortDateAsk(): Student[] {
-    return this.students.sort( (a, b) => this._sortAsk(a.dateOfBirth, b.dateOfBirth)) ;
-  }
-
-  sortDateDesk(): Student[] {
-    return this.students.sort( (a, b) => this._sortDesk(a.dateOfBirth, b.dateOfBirth)) ;
-  }
-
-  sortScoreAsk(): Student[] {
-    return this.students.sort( (a, b) => this._sortAsk(a.score, b.score)) ;
-  }
-
-  sortScoreDesk(): Student[] {
-    return this.students.sort( (a, b) => this._sortDesk(a.score, b.score)) ;
-  }
-
-  getDate(date: Date): string {
-    const time: string[] = [
-      "0" + date.getDate(),
-      "0" + (date.getMonth() + 1),
-      "0" + date.getFullYear(),
-    ].map(component => component.slice(-2));
-    return time.join(".");
   }
 
   changeHighlight(): void {
@@ -168,24 +111,6 @@ export class AppComponent implements OnInit {
     return !(dateOfBirth >= startDate && dateOfBirth <= endDate);
   }
 
-  findStudentByName(name: string): boolean {
-    if (this.searchName !== "") {
-      const lowerName: string = name.toLowerCase();
-      const findingName: string = this.searchName.toLowerCase();
-      return lowerName.indexOf(findingName) === 0;
-    }
-    return false;
-  }
-
-  findStudentBySurname(surname: string): boolean {
-    if (this.searchSurname !== "") {
-      const name: string = surname.toLowerCase();
-      const findingName: string = this.searchSurname.toLowerCase();
-      return name.indexOf(findingName) === 0;
-    }
-    return false;
-  }
-
   saveStudent(value: Student): void {
     if (this.editableStudent === null) {
       this.students.splice(this.students.length, 0, value);
@@ -210,4 +135,5 @@ export class AppComponent implements OnInit {
     this.editableStudent = null;
     this.isEditWindowShown = false;
   }
+
 }

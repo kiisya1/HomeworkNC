@@ -62,6 +62,17 @@ input[type="radio"].visually-hidden {
   cursor: pointer;
 }
 
+.control::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+
+  width: calc(100% - 40px);
+  height: 1px;
+  background-color: #16254c;
+}
+
 
 .button:hover,
 .button:focus,
@@ -77,59 +88,6 @@ input[type="radio"].visually-hidden {
   background-color: #16254d;
 
   cursor: default;
-}
-
-.header {
-  position: relative;
-
-  padding: 20px;
-  padding-top: 10px;
-  padding-bottom: 8px;
-  margin-bottom: 40px;
-
-  display: -webkit-box;
-
-  display: -ms-flexbox;
-
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.header::after,
-.control::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 20px;
-
-  width: calc(100% - 40px);
-  height: 1px;
-  background-color: #16254c;
-}
-
-.header__title {
-  padding: 0;
-  margin: 0;
-  margin-right: 40px;
-
-  font-size: 36px;
-  line-height: 49px;
-  font-weight: 700;
-}
-
-.header__description {
-  padding: 0;
-  margin: 0;
-
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 800;
-  text-transform: uppercase;
 }
 
 .homework {

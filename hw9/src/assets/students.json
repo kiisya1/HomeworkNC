@@ -1,7 +1,7 @@
 [
   {
     "surname": "Петров",
-    "name": "Василий",
+    "name": "василий",
     "middleName": "Аркадьевич",
     "dateOfBirth": "1980-02-17",
     "score": 3
@@ -9,7 +9,7 @@
   {
     "surname": "Васина",
     "name": "Марфа",
-    "middleName": "Юрьевна",
+    "middleName": "юрьевна",
     "dateOfBirth": "1995-11-30",
     "score": 5
   },
@@ -22,7 +22,7 @@
   },
   {
     "surname": "Чернышев",
-    "name": "Дмитрий",
+    "name": "дмитрий",
     "middleName": "Алексеевич",
     "dateOfBirth": "1994-06-10",
     "score": 5
