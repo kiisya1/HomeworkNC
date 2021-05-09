@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { AddFormComponent } from "./add-form.component";
 
-import { CommonDirectivesModule } from "../common-directives/common-directives.module";
+import { CommonDirectivesModule } from "../../common-directives/common-directives.module";
 
 @NgModule({
   imports: [BrowserModule, ReactiveFormsModule, CommonDirectivesModule],

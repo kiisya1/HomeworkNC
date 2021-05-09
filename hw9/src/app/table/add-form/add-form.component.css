@@ -170,6 +170,7 @@
 
 .poor-vision .add-form__container {
   background-color: black;
+  border: 2px solid white;
 }
 
 .poor-vision .add-form__close {

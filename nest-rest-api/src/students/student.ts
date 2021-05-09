@@ -1,8 +1,8 @@
 export interface Student {
+  id: string;
   surname: string;
   name: string;
   middleName: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   score: number;
-  id?: string;
 }

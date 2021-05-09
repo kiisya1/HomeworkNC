@@ -1,8 +1,7 @@
-export interface Student {
+export class UpdateStudentDto {
   surname: string;
   name: string;
   middleName: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   score: number;
-  id?: string;
 }
