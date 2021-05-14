@@ -137,7 +137,7 @@
               Удалить/редактировать
             </th>
           </tr>
-          <tr *ngFor="let student of studentsService.students" appHoverHighlight [class.table__red]="student.score < 4 && isRedHighlighted" [appFindByName] = "searchName" [student] = "student" [searchSurname] = "searchSurname" [class.table__isHidden] = "filterScore(student.score)" [class.table__hide] = "filterDate(student.dateOfBirth)">
+          <tr *ngFor="let student of studentsService.students$ | async" appHoverHighlight [class.table__red]="student.score < 4 && isRedHighlighted" [appFindByName] = "searchName" [student] = "student" [searchSurname] = "searchSurname" [class.table__isHidden] = "filterScore(student.score)" [class.table__hide] = "filterDate(student.dateOfBirth)">
             <td>{{student.surname | capitalLetter }}</td>
             <td>{{student.name | capitalLetter }}</td>
             <td>{{student.middleName | capitalLetter }}</td>

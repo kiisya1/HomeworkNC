@@ -3,7 +3,11 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map, tap } from "rxjs/operators";
 
+import { Store } from "@ngrx/store";
+import { selectStudents } from "./store/selectors/students.selectors";
+import { AppState } from "./store/state/app.state";
 import { Student } from "./student";
+import {GetStudentsFromServer} from './store/actions/students.actions';
 
 interface StudentFromServer {
   surname: string;
@@ -21,15 +25,19 @@ export class StudentsService {
   students: Student[] = [];
   loadedStudents: Student[] | null = null;
 
-  constructor(private http: HttpClient) {
-    this.getStudents();
+  students$ = this.store$.select(selectStudents);
+
+  constructor(private http: HttpClient, private store$: Store<AppState>) {
+    if (this.students.length === 0) {
+      this.getStudents();
+    }
   }
 
-  getStudents(): Observable<string> {
+  getStudents(): Observable<Student[]> {
     return this.http.get("http://localhost:3000/students", {responseType: "text"})
-      .pipe(tap(
+      .pipe(map(
         data => {
-          this.students = JSON.parse(data, function (key: string, value: string): string | Date | number | Student {
+          const students = JSON.parse(data, function (key: string, value: string): string | Date | number | Student {
             if (key === "dateOfBirth") {
               return new Date(value);
             }
@@ -38,7 +46,9 @@ export class StudentsService {
             }
             return value;
           });
+          this.students = students;
           this.loadedStudents = this.students.slice();
+          return students;
         }));
   }
 

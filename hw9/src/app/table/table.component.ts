@@ -2,8 +2,11 @@ import { HttpClient } from "@angular/common/http";
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, Inject, OnInit } from "@angular/core";
 import { ActivatedRoute, NavigationCancel, Router } from "@angular/router";
 
-import { Subscription } from "rxjs";
+import { Store } from "@ngrx/store";
+import { Observable, Subscription } from "rxjs";
 import { Query } from "../query";
+import { GetStudentsFromServer } from "../store/actions/students.actions";
+import { AppState } from "../store/state/app.state";
 import { Student } from "../student";
 import { STUDENT_SERVICE } from "../student-service-provider";
 import { StudentsDebugService } from "../students-debug.service";
@@ -40,7 +43,8 @@ export class TableComponent implements OnInit, DoCheck {
     private cdr: ChangeDetectorRef,
     @Inject(STUDENT_SERVICE) public studentsService: StudentsService | StudentsDebugService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private store$: Store<AppState>) {
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationCancel) {
@@ -62,10 +66,12 @@ export class TableComponent implements OnInit, DoCheck {
   }
 
   ngOnInit(): void {
-    this.studentsService.getStudents().subscribe(() => {
+    this.store$.dispatch(new GetStudentsFromServer);
+    this.studentsService.getStudents().subscribe((): void => {
       this.loading = false;
       this.cdr.detectChanges();
-    });
+    },
+      (err) => console.log(err));
   }
 
   ngDoCheck(): void {
